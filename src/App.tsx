@@ -1,15 +1,22 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Show, Text } from "@chakra-ui/react";
 import Profile from "./components/Profile";
+import ColorModeSwitch from "./components/ColorModeSwitch";
 
 function App() {
   return (
     <Grid
       templateAreas={{
-        base: `"user user" "tab tab" "main main"`,
-        lg: `"user profile" "chat main"`,
+        base: `"nav nav" "user user" "tab tab" "main main"`,
+        lg: `"nav nav" "user profile" "chat main"`,
       }}
     >
-      <GridItem area="user" >
+      <GridItem area="nav">
+        <HStack justifyContent="space-between" padding='10px'>
+          <Text fontSize='3xl' >Muzz</Text>
+          <ColorModeSwitch />
+        </HStack>
+      </GridItem>
+      <GridItem area="user">
         <Profile />
       </GridItem>
       <Show below="lg">
@@ -23,7 +30,7 @@ function App() {
           chatList
         </GridItem>
 
-        <GridItem area="profile" >
+        <GridItem area="profile">
           <Profile />
         </GridItem>
       </Show>
