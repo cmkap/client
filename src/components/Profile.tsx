@@ -1,25 +1,33 @@
-import { HStack, Image, Button } from "@chakra-ui/react";
+import { HStack, Image, Button, Box, Text } from "@chakra-ui/react";
 
-const Profile = () => {
+interface Props {
+    size?: string 
+    subTitle?: boolean 
+}
+
+const Profile = ({ size = "60px", subTitle }: Props) => {
   return (
     <HStack>
       <Image
-        boxSize={"60px"}
+        boxSize={size}
         borderRadius="full"
         objectFit="cover"
         src="https://bit.ly/dan-abramov"
         alt="Dan Abramov"
       />
-      <Button
-        whiteSpace="normal"
-        textAlign="left"
-        fontWeight={"bold"}
-        onClick={() => console.log("clicked")}
-        fontSize="large"
-        variant="link"
-      >
-        Dan Abramov
-      </Button>
+      <Box>
+        <Button
+          whiteSpace="normal"
+          textAlign="left"
+          fontWeight={"bold"}
+          onClick={() => console.log("clicked")}
+          fontSize="large"
+          variant="link"
+        >
+          Dan Abramov
+        </Button>
+        {subTitle && <Text>Expires in 20 minutes</Text>}
+      </Box>
     </HStack>
   );
 };
