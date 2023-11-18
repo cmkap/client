@@ -2,32 +2,23 @@ import { Grid, GridItem, Show, Tabs, TabList, Tab } from "@chakra-ui/react";
 import Profile from "../components/Profile";
 import ChatList from "../components/ChatList";
 import Chat from "../components/Chat";
-import { useReducer } from "react";
+
 import useSocketSetup from "../hooks/useSocketSetup";
 import { useLocation } from "react-router-dom";
-import Jane from "../assets/jane.png";
-import John from "../assets/john.png";
 
 import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
 import MessagesProvider from "../state-management/MessagesProvider";
 import useMessages from "../hooks/useMessages";
-interface LocationState {
-  id?: string;
-}
+import { userProfiles } from "../utils/userProfiles";
 
 function ChatPage() {
   const { dispatch } = useMessages();
+  const location = useLocation();
 
-  const location = useLocation<LocationState>();
-
-  const user = location.state?.user;
-  const image = user.id === "john" ? John : Jane;
-  const profileImage = user.id !== "john" ? John : Jane;
-  const userProfile = { ...user, image };
-
+  const { user, userProfile, profileImage } = userProfiles(location);
   const { onlineUsers } = useSocketSetup(user, dispatch);
 
-  let match = onlineUsers.find((u) => u.id !== user.id);
+  const match = onlineUsers.find((u) => u.id !== user.id);
   const profileMatch = { ...match, image: profileImage };
 
   return (
