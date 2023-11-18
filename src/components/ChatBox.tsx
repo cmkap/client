@@ -2,14 +2,16 @@ import { Button, HStack, Input } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import { useContext,  } from "react";
 import * as Yup from "yup";
-import { MatchContext } from "../pages/ChatPage";
 import socket from "../socket";
+import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
+import useMessages from "../hooks/useMessages";
 
 
 
 
 const ChatBox = () => {
-  const { user, dispatch } = useContext(MatchContext);
+  const { user } = useContext(OnlineUserContext);
+  const { dispatch } = useMessages()
 
   const receiver = user.id !== "john" ? "john" : "jane";
 

@@ -2,8 +2,8 @@ import { useEffect, useCallback, useReducer } from "react";
 
 import socket from "../socket";
 
-import { Message } from "../reducers/messagesReducer";
-import onlinUsersReducer from "../reducers/onlineUsersReducer";
+import { Message } from "../state-management/reducers/messagesReducer";
+import onlinUsersReducer from "../state-management/reducers/onlineUsersReducer";
 
 const useSocketSetup = (user, dispatchMessage) => {
   const [onlineUsers, dispatch] = useReducer(onlinUsersReducer, []);
@@ -11,7 +11,7 @@ const useSocketSetup = (user, dispatchMessage) => {
   const handleMessage = useCallback((msg: Message) => {
     dispatchMessage({ type: "ADD", message: { ...msg } });
   }, []);
-  
+
   useEffect(() => {
     socket.connect();
     socket.emit("addNewUser", user?.id);

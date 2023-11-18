@@ -1,4 +1,4 @@
-interface OnlineUser {
+export interface OnlineUser {
   userId: string;
   socketId: string;
 }
@@ -8,7 +8,7 @@ interface AddOnlineUser {
   onlineUsers: OnlineUser[];
 }
 
-type OnlineUserAction = AddOnlineUser;
+export type OnlineUserAction = AddOnlineUser;
 
 const onlinUsersReducer = (
   onlineUsers: OnlineUser[],

@@ -1,12 +1,13 @@
 import { VStack, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
 import React, { useContext, useEffect, useRef } from "react";
 import moment from "moment";
-
-import { MatchContext } from "../pages/ChatPage";
 import ChatBox from "./ChatBox";
+import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
+import useMessages from "../hooks/useMessages";
 
 const Chat = () => {
-  const { onlineUsers, messages, user } = useContext(MatchContext);
+  const { onlineUsers, user } = useContext(OnlineUserContext);
+  const { messages } = useMessages()
   const bottomDiv = useRef(null);
 
   useEffect(() => {

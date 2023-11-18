@@ -10,7 +10,7 @@ interface AddMessage {
   message: Message
 }
 
-type MessageAction = AddMessage
+export type MessageAction = AddMessage
 
 
 const messagesReducer = (messages: Message[], action: MessageAction): Message[] => {

@@ -13,9 +13,10 @@ import { useContext } from "react";
 import { MatchContext } from "../pages/ChatPage";
 import Jane from "../assets/jane.png";
 import John from "../assets/john.png";
+import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
 
 const ChatList = () => {
-  const {  onlineUsers, user } = useContext(MatchContext);
+  const {  onlineUsers, user } = useContext(OnlineUserContext);
 
   const updatedUsers = onlineUsers
     .map((u) => ({
