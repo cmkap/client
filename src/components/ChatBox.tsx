@@ -1,21 +1,15 @@
 import { Button, HStack, Input } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
-import { useContext, useReducer } from "react";
+import { useContext,  } from "react";
 import * as Yup from "yup";
 import { MatchContext } from "../pages/ChatPage";
 import socket from "../socket";
-import messagesReducer from "../reducers/messagesReducer";
 
-interface Message {
-  to: string;
-  from: string;
-  content: string;
-  time: number;
-}
+
+
 
 const ChatBox = () => {
-  const { setMessages, user, dispatch } = useContext(MatchContext);
-
+  const { user, dispatch } = useContext(MatchContext);
 
   const receiver = user.id !== "john" ? "john" : "jane";
 
@@ -36,7 +30,6 @@ const ChatBox = () => {
         socket.emit("sendMessage", { ...message, recipientId: receiver });
         dispatch({type: "ADD", message})
 
-        // setMessages((prevMessages: Message[]) => [message, ...prevMessages]);
         actions.resetForm();
       }}
     >

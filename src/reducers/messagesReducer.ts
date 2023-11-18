@@ -13,11 +13,12 @@ interface AddMessage {
 type MessageAction = AddMessage
 
 
-
 const messagesReducer = (messages: Message[], action: MessageAction): Message[] => {
   switch(action.type) {
     case 'ADD':
       return [ action.message, ...messages]
+    default: 
+      return messages
   }
 };
 

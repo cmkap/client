@@ -2,7 +2,7 @@ import { Grid, GridItem, Show, Tabs, TabList, Tab } from "@chakra-ui/react";
 import Profile from "../components/Profile";
 import ChatList from "../components/ChatList";
 import Chat from "../components/Chat";
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 import useSocketSetup from "../hooks/useSocketSetup";
 import { useLocation } from "react-router-dom";
 import Jane from "../assets/jane.png";
@@ -16,16 +16,16 @@ interface LocationState {
 export const MatchContext = createContext({});
 
 function ChatPage() {
+  const [messages, dispatch] = useReducer(messagesReducer, []);
+
   const location = useLocation<LocationState>();
+
   const user = location.state?.user;
   const image = user.id === "john" ? John : Jane;
   const profileImage = user.id !== "john" ? John : Jane;
   const userProfile = { ...user, image };
 
-  // const [messages, setMessages] = useState<Message[]>([]);
-  const [messages, dispatch ] = useReducer(messagesReducer, [])
-
-  const onlineUsers = useSocketSetup(user, dispatch);
+  const { onlineUsers } = useSocketSetup(user, dispatch);
 
   let match = onlineUsers.find((u) => u.id !== user.id);
   const profileMatch = { ...match, image: profileImage };
@@ -34,9 +34,9 @@ function ChatPage() {
     <MatchContext.Provider
       value={{
         onlineUsers,
-        messages,
         user,
-        dispatch
+        messages,
+        dispatch,
       }}
     >
       <Grid
